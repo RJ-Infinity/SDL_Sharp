@@ -1,4 +1,4 @@
-using SDL2;
+﻿using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +28,14 @@ namespace SDL_Sharp
             SDL.SDL_Rect rSrcInt = (SDL.SDL_Rect)rSrc;
             SDL.SDL_Rect rDestInt = (SDL.SDL_Rect)rDest;
             if (SDL.SDL_BlitSurface(InternalSurface, ref rSrcInt, surface.InternalSurface, ref rDestInt) < 0)
+            {
+                throw new SDLException(SDL.SDL_GetError());
+            }
+        }
+        public void FillRect(Rect rect, Colour colour)
+        {
+            SDL.SDL_Rect rectInt = (SDL.SDL_Rect)rect;
+            if (SDL.SDL_FillRect(InternalSurface, ref rectInt, (uint)colour) < 0)
             {
                 throw new SDLException(SDL.SDL_GetError());
             }
