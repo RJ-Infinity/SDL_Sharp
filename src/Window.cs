@@ -44,6 +44,10 @@ namespace SDL_Sharp
             }
             SDL.SDL_UpdateWindowSurface(InternalWindow);
         }
+        public void Render()
+        {
+            SDL.SDL_UpdateWindowSurface(InternalWindow);
+        }
         public Surface GetSurface()
         {
             return new Surface(SDL.SDL_GetWindowSurface(InternalWindow));
