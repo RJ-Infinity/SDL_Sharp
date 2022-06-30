@@ -27,7 +27,10 @@ namespace SDL_Sharp
         {
             SDL.SDL_Rect rSrcInt = (SDL.SDL_Rect)rSrc;
             SDL.SDL_Rect rDestInt = (SDL.SDL_Rect)rDest;
-            SDL.SDL_BlitSurface(InternalSurface, ref rSrcInt, surface.InternalSurface, ref rDestInt);
+            if (SDL.SDL_BlitSurface(InternalSurface, ref rSrcInt, surface.InternalSurface, ref rDestInt) < 0)
+            {
+                throw new SDLException(SDL.SDL_GetError());
+            }
         }
         public void BlitFrom(Surface surface, ref Rect rSrc, ref Rect rDest)=>surface.BlitTo(rSrc, this, rDest);
     }
