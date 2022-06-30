@@ -1,4 +1,4 @@
-using SDL2;
+﻿using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,13 +42,13 @@ namespace SDL_Sharp
         public byte b;
         public byte a;
         public static explicit operator uint(Colour c) =>
-            (uint) (c.r | (c.g << 8) | (c.b << 16) | (c.a << 24));
+            (uint) (c.b | (c.g << 8) | (c.r << 16) | (c.a << 24));
         public static explicit operator Colour(uint n)
         {
             Colour c = new Colour();
-            c.r =(byte)n;
+            c.r = (byte)(n >> 16);
             c.g = (byte)(n >> 8);
-            c.b = (byte)(n >> 16);
+            c.b =(byte)n;
             c.a = (byte)(n >> 24);
             return c;
         }
