@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="SDL2-CS">
+      <HintPath>..\..\SDL#\SDL2-CS\bin\Release\SDL2-CS.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
