@@ -1,4 +1,4 @@
-﻿using SDL2;
+using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,10 @@ namespace SDL_Sharp
         internal Surface(IntPtr internalSerface)
         {
             InternalSurface = internalSerface;
+        }
+        ~Surface()
+        {
+            SDL.SDL_FreeSurface(InternalSurface);
         }
         public static Surface LoadBitmap(string file)
         {
