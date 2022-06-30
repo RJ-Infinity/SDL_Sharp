@@ -1,4 +1,4 @@
-﻿using SDL2;
+using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +23,12 @@ namespace SDL_Sharp
             }
             return new Surface(rv);
         }
-        public void BlitTo(ref Rect rSrc, Surface surface, ref Rect rDest)
+        public void BlitTo(Rect rSrc, Surface surface, Rect rDest)
         {
             SDL.SDL_Rect rSrcInt = (SDL.SDL_Rect)rSrc;
             SDL.SDL_Rect rDestInt = (SDL.SDL_Rect)rDest;
             SDL.SDL_BlitSurface(InternalSurface, ref rSrcInt, surface.InternalSurface, ref rDestInt);
         }
-        public void BlitFrom(Surface surface, ref Rect rSrc, ref Rect rDest)=>surface.BlitTo(ref rSrc, this, ref rDest);
+        public void BlitFrom(Surface surface, ref Rect rSrc, ref Rect rDest)=>surface.BlitTo(rSrc, this, rDest);
     }
 }
