@@ -1,4 +1,4 @@
-﻿using SDL2;
+using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +31,9 @@ namespace SDL_Sharp
             rv.h = r.h;
             return rv;
         }
+        public static bool operator !=(Rect r1, Rect r2) => !(r1 == r2);
+        public static bool operator ==(Rect r1, Rect r2) =>
+            r1.w == r2.w && r1.h == r2.h && r1.x == r2.x && r1.y == r2.y;
     }
     public struct Colour
     {
