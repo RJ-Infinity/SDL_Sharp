@@ -44,6 +44,6 @@ namespace SDL_Sharp
                 throw new SDLException(SDL.SDL_GetError());
             }
         }
-        public void BlitFrom(Surface surface, ref Rect rSrc, ref Rect rDest)=>surface.BlitTo(rSrc, this, rDest);
+        public void BlitFrom(Surface surface, Rect rSrc, Rect rDest)=>surface.BlitTo(rSrc, this, rDest);
     }
 }
