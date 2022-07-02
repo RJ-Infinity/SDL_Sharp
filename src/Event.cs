@@ -1,4 +1,4 @@
-using SDL2;
+﻿using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ namespace SDL_Sharp
         {
             Type = (EventType)e.type;
             Key = new KeyboardEvent(e.key);
+            Button = new MouseButtonEvent(e.button);
             SDLEvent = e;
         }
         public static Event Poll()
@@ -94,7 +95,7 @@ namespace SDL_Sharp
         public SDL.SDL_TextEditingExtEvent editExt;
         public SDL.SDL_TextInputEvent text;
         public SDL.SDL_MouseMotionEvent motion;
-        public SDL.SDL_MouseButtonEvent button;
+        public MouseButtonEvent Button;
         public SDL.SDL_MouseWheelEvent wheel;
         public SDL.SDL_JoyAxisEvent jaxis;
         public SDL.SDL_JoyBallEvent jball;
@@ -133,6 +134,43 @@ namespace SDL_Sharp
             state = e.state;
             repeat = e.repeat;
             keysym = new Keysym(e.keysym);
+        }
+    }
+    public struct MouseButtonEvent
+    {
+        public Event.EventType type;
+        public uint timestamp;
+        public Window window;
+        public uint which;
+        public Button button;
+        public State state;
+        public byte clicks;
+        public int x;
+        public int y;
+        internal MouseButtonEvent(SDL.SDL_MouseButtonEvent e)
+        {
+            type = (Event.EventType)e.type;
+            timestamp = e.timestamp;
+            window = new Window(SDL.SDL_GetWindowFromID(e.windowID));
+            which = e.which;
+            button = (Button)e.button;
+            state = (State)e.state;
+            clicks = e.clicks;
+            x = e.x;
+            y = e.y;
+        }
+        public enum Button : uint
+        {
+            LEFT = SDL.SDL_BUTTON_LEFT,
+            MIDDLE = SDL.SDL_BUTTON_MIDDLE,
+            RIGHT = SDL.SDL_BUTTON_RIGHT,
+            X1 = SDL.SDL_BUTTON_X1,
+            X2 = SDL.SDL_BUTTON_X2,
+        }
+        public enum State : uint
+        {
+            PRESSED = SDL.SDL_PRESSED,
+            RELEASED = SDL.SDL_RELEASED,
         }
     }
 }
