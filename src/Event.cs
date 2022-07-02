@@ -1,4 +1,4 @@
-﻿using SDL2;
+using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,7 @@ namespace SDL_Sharp
         internal Event(SDL.SDL_Event e)
         {
             Type = (EventType)e.type;
+            Key = new KeyboardEvent(e.key);
             SDLEvent = e;
         }
         public static Event Poll()
@@ -88,7 +89,7 @@ namespace SDL_Sharp
         public EventType Type;
         public SDL.SDL_DisplayEvent display;
         public SDL.SDL_WindowEvent window;
-        public SDL.SDL_KeyboardEvent key;
+        public KeyboardEvent Key;
         public SDL.SDL_TextEditingEvent edit;
         public SDL.SDL_TextEditingExtEvent editExt;
         public SDL.SDL_TextInputEvent text;
@@ -114,5 +115,24 @@ namespace SDL_Sharp
         public SDL.SDL_MultiGestureEvent mgesture;
         public SDL.SDL_DollarGestureEvent dgesture;
         public SDL.SDL_DropEvent drop;
+    }
+
+    public struct KeyboardEvent
+    {
+        public Event.EventType type;
+        public uint timestamp;
+        public Window window;
+        public byte state;
+        public byte repeat;
+        public Keysym keysym;
+        internal KeyboardEvent(SDL.SDL_KeyboardEvent e)
+        {
+            type = (Event.EventType)e.type;
+            timestamp = e.timestamp;
+            window = new Window(SDL.SDL_GetWindowFromID(e.windowID));
+            state = e.state;
+            repeat = e.repeat;
+            keysym = new Keysym(e.keysym);
+        }
     }
 }

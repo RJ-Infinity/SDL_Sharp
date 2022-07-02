@@ -1,4 +1,4 @@
-﻿using SDL2;
+using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,13 @@ namespace SDL_Sharp
         public int Width;
         public int Height;
         public string Title;
+        internal Window(IntPtr internalWindow)
+        {
+            InternalWindow = internalWindow;
+            SDL.SDL_GetWindowSize(InternalWindow,out Width, out Height);
+            Title = SDL.SDL_GetWindowTitle(InternalWindow);
+        }
+
         public Window(string title, int width, int height)
         {
             SDL.SDL_SetHint(SDL.SDL_HINT_WINDOWS_DISABLE_THREAD_NAMING, "1");
