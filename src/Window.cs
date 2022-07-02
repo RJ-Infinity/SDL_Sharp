@@ -1,4 +1,4 @@
-using SDL2;
+﻿using SDL2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,12 +53,21 @@ namespace SDL_Sharp
         }
         public void Render()
         {
-            SDL.SDL_UpdateWindowSurface(InternalWindow);
+            if (SDL.SDL_UpdateWindowSurface(InternalWindow) < 0)
+            {
+                throw new SDLException(SDL.SDL_GetError());
+            }
         }
         public Surface GetSurface()
         {
-            return new Surface(SDL.SDL_GetWindowSurface(InternalWindow));
+            IntPtr surface = SDL.SDL_GetWindowSurface(InternalWindow);
+            if (surface == IntPtr.Zero)
+            {
+                throw new SDLException(SDL.SDL_GetError());
+            }
+            return new Surface(surface);
         }
+        public Window FixBrokenWindow() => new Window(InternalWindow);
         public enum WindowFlags : uint
         {
             FULLSCREEN = SDL.SDL_WindowFlags.SDL_WINDOW_FULLSCREEN,
