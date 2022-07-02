@@ -34,6 +34,17 @@ namespace SDL_Sharp
         public static bool operator !=(Rect r1, Rect r2) => !(r1 == r2);
         public static bool operator ==(Rect r1, Rect r2) =>
             r1.w == r2.w && r1.h == r2.h && r1.x == r2.x && r1.y == r2.y;
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is null || obj.GetType() != typeof(Rect)) {return false;}
+            return this == (Rect)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
     }
     public struct Colour
     {
