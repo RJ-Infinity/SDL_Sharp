@@ -77,5 +77,10 @@ namespace SDL_Sharp
             }
         }
         public void BlitFrom(Surface surface, Rect rSrc, Rect rDest)=>surface.BlitTo(rSrc, this, rDest);
+        //public Surface ConvertTo()
+        //{
+        //    SDL.format
+        //    return new Surface();
+        //}
     }
 }
